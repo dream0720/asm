@@ -1,7 +1,7 @@
 .MODEL SMALL
 
 DATASEG SEGMENT
-    Letters DB 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+    Letters DB 'a'
 DATASEG ENDS
 
 CODESEG SEGMENT
@@ -16,10 +16,12 @@ MAIN PROC
     MOV SI, 0           ; 数组索引初始化为0
 
 L: 
-    MOV AL, [Letters + SI] ; 从数组中取出小写字母
+    MOV AL, [Letters] ; 从数组中取出小写字母
+    MOV DL, AL
     MOV AH, 02h          ; 设置功能号为打印字符
+    INC AL               ; 移动到下一个字母
+    MOV [Letters], AL
     INT 21H              ; 打印当前字符
-    INC SI               ; 移动到下一个字母
     LOOP L               ; 循环直到CX为0
 
     ; 退出程序
