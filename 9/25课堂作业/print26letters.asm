@@ -8,7 +8,6 @@ CODESEG SEGMENT
     ASSUME CS:CODESEG, DS:DATASEG
 
 MAIN PROC
-    ; 初始化数据段
     MOV AX, DATASEG
     MOV DS, AX
 
@@ -24,7 +23,6 @@ L:
     INT 21H              ; 打印当前字符
     LOOP L               ; 循环直到CX为0
 
-    ; 退出程序
     MOV AX, 4C00h        ; 退出程序
     INT 21H
 MAIN ENDP
